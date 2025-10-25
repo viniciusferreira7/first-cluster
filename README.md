@@ -78,10 +78,6 @@ kubectl describe node <node-name>
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
 - [kind Documentation](https://kind.sigs.k8s.io/)
 
-## Notes
-
-⚠️ **Known Issue**: There's a typo in the current `kind.yaml` file - `control-plan` should be `control-plane`. This may need to be corrected for the cluster to work properly.
-
 ## Project Status
 
 🚧 This is a study project and is currently under development as part of learning DevOps practices and Kubernetes fundamentals.
