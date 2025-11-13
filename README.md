@@ -25,6 +25,7 @@ The cluster is defined in [kind.yaml](kind.yaml) with the following topology:
 first-cluster/
 ├── kind.yaml          # Kubernetes cluster configuration
 ├── pod.yaml           # Nginx pod declarative configuration
+├── deployment.yaml    # Nginx deployment with 5 replicas
 └── README.md          # This file
 ```
 
@@ -44,6 +45,22 @@ A sample Nginx pod is defined in [pod.yaml](pod.yaml) with the following specifi
   - Memory: 128Mi
 
 This pod demonstrates resource management best practices for Kubernetes workloads.
+
+### Nginx Deployment
+
+A Kubernetes Deployment for Nginx is defined in [deployment.yaml](deployment.yaml) with the following specifications:
+
+- **Replicas**: 5 - Multiple pod replicas for high availability
+- **Image**: `nginx:1.29.3-alpine3.22-slim` - Lightweight Nginx image
+- **Port**: 80 (HTTP)
+- **Resource Requests**:
+  - CPU: 100m
+  - Memory: 64Mi
+- **Resource Limits**:
+  - CPU: 200m
+  - Memory: 128Mi
+
+The Deployment manages multiple Nginx pod replicas, providing load balancing and automatic recovery if pods fail.
 
 ## Getting Started
 
@@ -79,17 +96,33 @@ kubectl get pods
 kubectl describe pod nginx
 ```
 
-### 4. Access the Nginx Pod
+### 4. Deploy the Nginx Deployment
 
-Forward the pod's port to your local machine:
+Deploy the Nginx Deployment with 5 replicas:
 
 ```bash
-kubectl port-forward pod/nginx 8080:80
+kubectl apply -f deployment.yaml
+```
+
+Verify the deployment is running:
+
+```bash
+kubectl get deployments
+kubectl get pods
+kubectl describe deployment nginx
+```
+
+### 5. Access the Nginx Pods
+
+Forward the deployment's port to your local machine:
+
+```bash
+kubectl port-forward deployment/nginx 8080:80
 ```
 
 Then access Nginx at `http://localhost:8080` in your browser.
 
-### 5. Start Experimenting!
+### 6. Start Experimenting!
 
 Explore more Kubernetes concepts by creating additional pods, services, and deployments.
 
@@ -141,6 +174,31 @@ kubectl delete pod nginx
 
 # Forward pod port
 kubectl port-forward pod/nginx 8080:80
+```
+
+### Deployment Management
+
+```bash
+# Apply/Deploy the Nginx deployment
+kubectl apply -f deployment.yaml
+
+# View deployment details
+kubectl describe deployment nginx
+
+# View deployment replicas
+kubectl get deployment nginx
+
+# Scale the deployment
+kubectl scale deployment nginx --replicas=3
+
+# Delete the deployment
+kubectl delete deployment nginx
+
+# Forward deployment port
+kubectl port-forward deployment/nginx 8080:80
+
+# View deployment logs
+kubectl logs -l app=nginx --tail=100
 ```
 
 ## Learning Resources
