@@ -1,7 +1,5 @@
 # First Cluster - Kubernetes Study Project
 
-> **Work in Progress** - This is a learning project from the Rocketseat DevOps curriculum
-
 ## Overview
 
 This repository contains configuration for creating a local Kubernetes cluster using [kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker). It's designed for learning Kubernetes concepts and practicing cluster operations in a local development environment.
